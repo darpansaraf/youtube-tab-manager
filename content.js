@@ -27,25 +27,26 @@ chrome.windows.getCurrent(function(win)	{
 
 function getYoutubeTabComponent (previousVideoLink, isVideoPlaying, linkToNextVideo,videoTitle) {
 	var ytElement = `<div class="popup">
-					<div>
-						<a style="background:none;border:none;box-shadow:none;float:left;" href="` + previousVideoLink + `">
-										  <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+					<div class="tab-controls">
+						<a href="` + previousVideoLink + `">
+										  <img src="icons/skip-previous.svg" alt="previous">
 						</a>`;
 
 						if(isVideoPlaying){
-							ytElement += `<a style="background:none;border:none;box-shadow:none;float:left;">
-								  <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+							ytElement += `<a>
+							<img src="icons/pause.svg" alt="previous">
 							</a>`;
 						}else{
-							ytElement += `<a style="background:none;border:none;box-shadow:none;float:left;">
-								  <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+							ytElement += `<a>
+							<img src="icons/play.svg" alt="previous">
+								  
 							</a>`;
 						}
-						ytElement += `<a style="background:none;border:none;box-shadow:none;float:left;" href="`+ linkToNextVideo + `">
-									  <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+						ytElement += `<a href="`+ linkToNextVideo + `">
+							<img src="icons/skip-next.svg" alt="previous">
 								</a>
 					</div>`;
-					ytElement +=(`<div style="width:100%;height:10px">
+					ytElement +=(`<div class="tab-title">
 							<p id="videoTitle">` + videoTitle +`</p>
 						</div>
 				</div>`);
