@@ -11,19 +11,28 @@ chrome.windows.getCurrent(function(win)	{
 					var tabId = tabs[tabIndex].id;
 					var audible = tabs[tabIndex].audible;
 					var title = tabs[tabIndex].title;
-					//chrome.tabs.update(tabId,{url:"https://www.youtube.com/watch?v=B_LQkd-ERMI&list=RDB_LQkd-ERMI"});
-
+					
 					var linkToNextVideo = null;
-					chrome.tabs.executeScript(tabId,{file:"core.js",allFrames: true},function (results) {
-						// body...
-					linkToNextVideo = results[0];
-					var ytTabComponent = getYoutubeTabComponent(currentYoutubeVideoUrl,audible,linkToNextVideo,title);
-					$('#listOfOpenYoutubeTabs').append(ytTabComponent);
-					});
-				}
+					var ytTabComponent = null
+					someFunction(tabId,currentYoutubeVideoUrl,audible,title,function (ytTabComponent){
+										console.log('Async function has been executed');
+										console.log(ytTabComponent);
+										$('#listOfOpenYoutubeTabs').append(ytTabComponent);
+						});
+				};
 			};
 		});
 	});
+
+function someFunction (tabId,currentYoutubeVideoUrl,audible,title,callBack) {
+	var ytTabComponent = null
+	chrome.tabs.executeScript(tabId,{file:"core.js",allFrames: true},function (results) {
+								linkToNextVideo = results[0];
+								ytTabComponent = getYoutubeTabComponent(currentYoutubeVideoUrl,audible,linkToNextVideo,title);
+								callBack(ytTabComponent);
+							});
+}
+
 
 function getYoutubeTabComponent (previousVideoLink, isVideoPlaying, linkToNextVideo,videoTitle) {
 	var ytElement = `<div class="popup">
@@ -51,6 +60,5 @@ function getYoutubeTabComponent (previousVideoLink, isVideoPlaying, linkToNextVi
 						</div>
 				</div>`);
 
-	console.log(ytElement);
 	return ytElement;
 }
