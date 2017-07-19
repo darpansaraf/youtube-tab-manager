@@ -14,9 +14,7 @@ chrome.windows.getCurrent(function(win)	{
 					
 					var linkToNextVideo = null;
 					var ytTabComponent = null
-					someFunction(tabId,currentYoutubeVideoUrl,audible,title,function (ytTabComponent){
-										console.log('Async function has been executed');
-										console.log(ytTabComponent);
+					getYTTabDetailsAndAppendToDOM(tabId,currentYoutubeVideoUrl,audible,title,function (ytTabComponent){
 										$('#listOfOpenYoutubeTabs').append(ytTabComponent);
 						});
 				};
@@ -24,12 +22,12 @@ chrome.windows.getCurrent(function(win)	{
 		});
 	});
 
-function someFunction (tabId,currentYoutubeVideoUrl,audible,title,callBack) {
+function getYTTabDetailsAndAppendToDOM(tabId,currentYoutubeVideoUrl,audible,title,appendYTTabToDOM) {
 	var ytTabComponent = null
 	chrome.tabs.executeScript(tabId,{file:"core.js",allFrames: true},function (results) {
 								linkToNextVideo = results[0];
 								ytTabComponent = getYoutubeTabComponent(currentYoutubeVideoUrl,audible,linkToNextVideo,title);
-								callBack(ytTabComponent);
+								appendYTTabToDOM(ytTabComponent);
 							});
 }
 
