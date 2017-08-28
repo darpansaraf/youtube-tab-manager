@@ -24,8 +24,8 @@ This file also provides metadata extension.
 
 	"content_scripts": [
 	  {
-	  	"matches":["https://*.youtube.com/*"],
-	    "js": ["content.js","jquery-3.2.1.min.js","styles.css","bootstrap.min.css"]
+	  	"matches":["https://www.youtube.com/*"],
+	    "js": ["jquery-3.2.1.min.js","styles.css","bootstrap.min.css"]
 	  }
 	]
 }
