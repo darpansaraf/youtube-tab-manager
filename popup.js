@@ -35,11 +35,11 @@ function getYoutubeTabComponent(tabId, isVideoPlaying, videoTitle) {
             </a>`;
     if (isVideoPlaying) {
         ytElement += `<a href="#" name="` + tabId + `" class="pause">
-              <img src="icons/pause.svg" alt="pause" >
+              <img src="icons/pause.svg" alt="pause"  id="` + tabId + `">
               </a>`;
     } else {
         ytElement += `<a href="#" name="` + tabId + `" class="play">
-              <img src="icons/play.svg" alt="play">
+              <img src="icons/play.svg" alt="play" id="` + tabId + `">
               </a>`;
     }
     ytElement += `<a href="#" name="` + tabId + `" class="next">
@@ -66,22 +66,19 @@ $(document).on('click', '.previous', function() {
 
 $(document).on('click', '.play', function() {
     console.log('hello play');
-    var img = $(this).find('img')[0];
-    img.src = 'icons/pause.svg';
     var tabId = parseInt($(this).attr('name'));
-
-    console.log('The tabId is:'+tabId);
+    $(this).attr('class','pause');
+    document.getElementById(tabId).src = 'icons/pause.svg';
     chrome.tabs.executeScript(tabId,{file:'jquery-3.2.1.min.js'},function() {
         chrome.tabs.executeScript(tabId, {code:'document.getElementsByClassName("ytp-play-button")[0].click();'});
     });
 });
 
 $(document).on('click', '.pause', function() {
-    console.log('hello pause');
-    var img = $(this).find('img')[0];
-    img.src = 'icons/play.svg';
+    //console.log('hello pause');
     var tabId = parseInt($(this).attr('name'));
-    console.log('The tabId is:'+tabId);
+    $(this).attr('class','play');
+    document.getElementById(tabId).src = 'icons/play.svg';
     chrome.tabs.executeScript(tabId,{file:'jquery-3.2.1.min.js'},function() {
         chrome.tabs.executeScript(tabId, {code:'document.getElementsByClassName("ytp-play-button")[0].click();'});
     });
