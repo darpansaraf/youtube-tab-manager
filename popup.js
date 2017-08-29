@@ -56,16 +56,16 @@ function getYoutubeTabComponent(tabId, isVideoPlaying, videoTitle) {
 
 
 $(document).on('click', '.previous', function() {
-    console.log('hello previous');
+//    console.log('hello previous');
     var tabId = parseInt($(this).attr('name'));
-    console.log('The tabId is:'+tabId);
+  //  console.log('The tabId is:'+tabId);
     chrome.tabs.executeScript(tabId,{file:'jquery-3.2.1.min.js'},function() {
         chrome.tabs.executeScript(tabId, {code:'document.getElementsByClassName("ytp-play-button")[0].click();'});
       });
 });
 
 $(document).on('click', '.play', function() {
-    console.log('hello play');
+    //console.log('hello play');
     var tabId = parseInt($(this).attr('name'));
     $(this).attr('class','pause');
     document.getElementById(tabId).src = 'icons/pause.svg';
@@ -85,9 +85,9 @@ $(document).on('click', '.pause', function() {
 });
 
 $(document).on('click', '.next', function() {
-    console.log('hello next');
+    //console.log('hello next');
     var tabId = parseInt($(this).attr('name'));
-    console.log('The tabId is:'+tabId);
+    //console.log('The tabId is:'+tabId);
     chrome.tabs.executeScript(tabId,{file:'jquery-3.2.1.min.js'},function() {
         chrome.tabs.executeScript(tabId, {code:'document.getElementsByClassName("ytp-next-button")[0].click();'});
     });
